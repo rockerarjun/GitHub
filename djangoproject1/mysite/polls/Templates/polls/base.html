@@ -1,0 +1,116 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Django Project">
+    <meta name="author" content="Arjun sapkota">
+    <title>Footballworldcup predection : Polls {{ title }}</title>
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <link href="{% static "css/dashboard.css" %}" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.charts.js" %}"></script>
+   <script type="text/javascript" src="{% static "fusioncharts/themes/fusioncharts.theme.fint.js" %}"></script>
+    <script type="text/javascript" src={% static "fusioncharts/fusioncharts-jquery-plugin.js" %}></script>
+        <script type="text/javascript" src={% static "fusioncharts/fusioncharts-jquery-plugin.min.js" %}></script>
+
+</head>
+
+<body class="dashboard">
+<div id="container">
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name" style="color:#52ec0b">Football  predection : Polls System</h1>
+        </div>
+        <div id="user-tools">
+            <p>
+                {% if user.is_authenticated %}
+                    
+                    <a href="/polls/index/"> POLLS </a> > >
+                    <a href="/polls/profile/{{ user.username }}" style="color:#f30909">Profile</a> > >
+                     <a href= " Welcome {{ user.username }}" style="color:#fc0707"></a> <a href="/polls/logout" style="color:#09f851">Logout</a>
+                {% else %}
+                    <a href="/polls/"> POLLS </a>
+                    <a href="/polls/login" style="color:#f70c0c">Login</a>
+                    <a href="/polls/logout" style="color:#f70c0c">Logout</a>
+                {% endif %}//
+                <a href="/polls/email/" style="color:#f10909">Contact Email</a>---<a href="polls/Vote for worldcup predection POLLS/" style="color:#09fa29">Vote for worldcup predection POLLS</a>
+            </p>
+        </div>
+    </div>
+    <div class="breadcrumbs">
+        {% if user.is_authenticated %}
+            <a href="/polls/index/" style=color:#52ec0b> POLLS </a>
+            >>
+            <a href="/polls/viewall/" style=color:#ec0b0b> View ALL Results </a>
+            <input type="button" value="VOTES" class="default" name="save" id="shownow" style="color:#f30909"/>
+           {%comment%}
+           <form type="get" action="." style="margin: 0">
+            <form method="GET" action="{% url 'polls:search'}">
+                <input name="qds" value="{{request.GET.q}}" placeholder="search..">
+                <button class="btn btn-success"type="submit" style ="color:#f30909"/>
+                    Search
+                </button>
+            </form>
+        </form>
+        
+        <form id="searchform" action="" method="get" accept-charset="utf-8">
+            <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search" title="search .. ">
+            <input class="btn btn-success" type="button" value="Search.."
+                     onclick="location.href='{% url 'polls:index' %}'"
+                     title="Search entered text"/>
+          </form>
+          {% endcomment %}
+        {% else %}
+            <a href="/polls/"> POLLS </a>
+        {% endif %}
+    </div>
+    <hr/>
+    
+        
+
+    <div id="content" class="colMS">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           

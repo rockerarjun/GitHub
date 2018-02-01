@@ -1,0 +1,79 @@
+{% extends "polls/base.html" %}
+{% block content %}
+    <p>
+    <form id="searchform" method="get" enctype="multipart/form-data">
+        <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search" style="color:#f00505"title="search .. ">
+        <input type="submit" style="color:rgb(10, 248, 10)" value="Search.."
+        title="Search entered text"/>
+      </form>
+    <input type="button" value=" Questions list for football predection polls" class="default" name="save" id="shownow"/>
+    </p>
+    {% if questions %}
+        <ul>
+            {% for question in questions %}
+                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+        </ul>
+        {% comment %}<h1><a href="{% url 'polls:add_poll' %}"/a></h1>{% endcomment %}
+        
+        
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+
+    {% if searchResult %}
+        <hr>
+        <p><u>Search Results: </u></p>
+        {% for result in searchResult %}
+            <ul>
+            <li>{{ result }}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <hr>
+        <p>No Results Found.</p>
+        {% if resultno %}
+        <b>{{resultno}}</b>
+        {% endif %}
+    {% endif %}
+
+    <hr>
+    <br/>
+    <hr>
+    <p>Filtering</p>
+    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div>
+            <fieldset class="module aligned ">
+                <div class="form-row">
+                    <!--<p>{{ form.status.help_text }} : </p>-->
+                    {{ form.status.errors }}
+                    {{ form.status }}
+                    <input type="submit" value="Histogram" class="default" name="_save" id="shownow"
+                           title="Select List of Available Histogram">
+                    <input type="submit" value="piediagram" class="default" name="_save" id="shownow"
+                           title="Select List of Available piediagram">
+                  
+                           <input type="submit" value="Filter" class="default" name="_save" id="shownow"
+                              title="Select List of Available Filters">
+                    
+                </div>
+            </fieldset>
+        </div>
+
+    </form>
+    <div id="chart-1" style="border:1px solid #f00505">{{ output|safe }}</div>
+
+{% endblock %}
+
+{#def mypage(request):#}
+{##}
+{#    details = Personal_details.objects.select_related().filter(experience=3)#}
+{#    names = [d.reg.name for d in details]#}
+{##}
+{#    return render(request, 'mypage.html', {'names': names})#}
+
+{#{% for name in names %}#}
+{#        <li>{{ name }}</li>#}
+{#    {% empty %}#}
+{#        <li>Nobody has 3 experience!</li>#}
+{#    {% endfor %}#}

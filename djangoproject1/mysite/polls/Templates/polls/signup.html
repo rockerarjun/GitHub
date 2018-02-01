@@ -1,0 +1,25 @@
+{% extends "polls/base_user.html" %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+{#    {{ form.as_p }}#}
+       {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: rgb(241, 16, 16)">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" name="signup" value="Register Details" />
+      <input type="button" name="Login" value="Already Registered - Login" onclick="location.href='{% url 'polls:login' %}'" title="Login with existing account"/>
+
+
+
+  </form>
+{% endblock %}
